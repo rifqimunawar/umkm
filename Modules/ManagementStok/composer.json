@@ -1,0 +1,30 @@
+{
+    "name": "nwidart/managementstok",
+    "description": "",
+    "authors": [
+        {
+            "name": "Nicolas Widart",
+            "email": "n.widart@gmail.com"
+        }
+    ],
+    "extra": {
+        "laravel": {
+            "providers": [],
+            "aliases": {
+
+            }
+        }
+    },
+    "autoload": {
+        "psr-4": {
+            "Modules\\ManagementStok\\": "app/",
+            "Modules\\ManagementStok\\Database\\Factories\\": "database/factories/",
+            "Modules\\ManagementStok\\Database\\Seeders\\": "database/seeders/"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "Modules\\ManagementStok\\Tests\\": "tests/"
+        }
+    }
+}

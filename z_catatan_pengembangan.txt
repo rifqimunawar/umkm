@@ -1,0 +1,42 @@
+1. module produk di tambahkan ->done
+  komponen-komponen produksi, ->done
+  diskon penjualan (opsional)
+
+2. logic di retur pembelian, ketika di retur, di controller nya, -> done
+  lakukan penghapusan data produk atau bahan atau asset, berdasakrkan tipe sumber 1,2,3 -> done
+
+3. module hutang pembelian
+    tambahkan query produk dan bahann ke indexnya, done
+    ketika simpan update nominal di produk atau bahan atau asset pada nominal hutangnya. ===========>done
+
+4. module kasir,
+    gunakan harga satuan produk ->done
+    tambahan diskon penjualan (opesional)
+    tambahkan id transaksi 4 karakter, ->done
+    struk nota transaksi done ->
+
+5. module retur penjualan konsumen belum di bikin
+    edit transaksi juga belum ---> pembuatan nya selesai
+    skema retur itu list transaksi, ketika di pilih muncul header dan list produk penjualan dengan fitur retur pada masing masing listnya. -> done
+    struk penjualan -->done
+
+    =============== semua yang di atas sudah selesai tinggal masuk ke laporan
+
+6. moduel laporan
+  -> laporan penjualan ->done
+  -> riwayat pengeluaran operasional dan pengeluaran lain --> done
+  -> laporan stok bahan ->done
+  -> laporan stok produk ->done
+  -> piutang konsumen, di dalmnya juga ada riwayat pembayaran piutang konsumen ->done
+  -> riwayat pembelian, produk asset dan bahan, -> progress, tambahkan kolom status lunas atau hutang ->done
+
+7. module ke uangan
+  -> kas keluar masuk, tgl keterangan, nominal satuan, qty, total nominal
+  -> rekening bank, yang cash dan lain lain
+
+8. buat module SaldoKas yang jadi parameter naik turunnya kas
+
+9. tambahkan dashboard statistik perbandingan penjualan hari kemarin dan sekarang,
+    serta tambahan hutang jatuh tempo paling dekat
+
+10. perbaiki skema retur pembelian, tambahkan quantity returnya

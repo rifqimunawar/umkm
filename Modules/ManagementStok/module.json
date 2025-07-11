@@ -1,0 +1,11 @@
+{
+    "name": "ManagementStok",
+    "alias": "managementstok",
+    "description": "",
+    "keywords": [],
+    "priority": 0,
+    "providers": [
+        "Modules\\ManagementStok\\Providers\\ManagementStokServiceProvider"
+    ],
+    "files": []
+}

@@ -1,0 +1,11 @@
+{
+    "name": "Konsumen",
+    "alias": "konsumen",
+    "description": "",
+    "keywords": [],
+    "priority": 0,
+    "providers": [
+        "Modules\\Konsumen\\Providers\\KonsumenServiceProvider"
+    ],
+    "files": []
+}

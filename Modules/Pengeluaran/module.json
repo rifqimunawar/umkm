@@ -1,0 +1,11 @@
+{
+    "name": "Pengeluaran",
+    "alias": "pengeluaran",
+    "description": "",
+    "keywords": [],
+    "priority": 0,
+    "providers": [
+        "Modules\\Pengeluaran\\Providers\\PengeluaranServiceProvider"
+    ],
+    "files": []
+}

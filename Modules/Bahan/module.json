@@ -1,0 +1,11 @@
+{
+    "name": "Bahan",
+    "alias": "bahan",
+    "description": "",
+    "keywords": [],
+    "priority": 0,
+    "providers": [
+        "Modules\\Bahan\\Providers\\BahanServiceProvider"
+    ],
+    "files": []
+}

@@ -1,0 +1,11 @@
+{
+    "name": "Kriteria",
+    "alias": "kriteria",
+    "description": "",
+    "keywords": [],
+    "priority": 0,
+    "providers": [
+        "Modules\\Kriteria\\Providers\\KriteriaServiceProvider"
+    ],
+    "files": []
+}

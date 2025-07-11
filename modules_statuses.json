@@ -1,0 +1,23 @@
+{
+    "Settings": true,
+    "Users": true,
+    "Auth": true,
+    "Dashboard": true,
+    "Profile": true,
+    "Laporan": true,
+    "Karyawan": true,
+    "Periode": true,
+    "Jabatan": true,
+    "Kriteria": true,
+    "Penilaian": true,
+    "ManagementStok": true,
+    "Kasir": true,
+    "Bahan": true,
+    "Konsumen": true,
+    "Penjualan": true,
+    "Master": true,
+    "Pembelian": true,
+    "Pemasukan": true,
+    "Pengeluaran": true,
+    "M2block": true
+}

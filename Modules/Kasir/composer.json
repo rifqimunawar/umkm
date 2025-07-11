@@ -1,0 +1,30 @@
+{
+    "name": "nwidart/kasir",
+    "description": "",
+    "authors": [
+        {
+            "name": "Nicolas Widart",
+            "email": "n.widart@gmail.com"
+        }
+    ],
+    "extra": {
+        "laravel": {
+            "providers": [],
+            "aliases": {
+
+            }
+        }
+    },
+    "autoload": {
+        "psr-4": {
+            "Modules\\Kasir\\": "app/",
+            "Modules\\Kasir\\Database\\Factories\\": "database/factories/",
+            "Modules\\Kasir\\Database\\Seeders\\": "database/seeders/"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "Modules\\Kasir\\Tests\\": "tests/"
+        }
+    }
+}

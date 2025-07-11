@@ -1,0 +1,128 @@
+###import di blade
+@php
+  use App\Helpers\Fungsi;
+  use app\Helpers\GetSettings;
+@endphp
+
+#jalakan meilisearch
+./meilisearch
+
+#jalakan python flask
+source venv/Scripts/activate
+pip install flask
+python app.py
+
+
+
+select dt.created_at, dt.nama_produk, dt.produk_id, p.is_produksi, b.nama_bahan, bp.jumlah_bahan_digunakan_unk_1_produk
+from detail_transaksis dt
+join produks p on dt.produk_id = p.id
+join bahan_produks bp on dt.produk_id = bp.produk_id
+join bahans b on bp.bahan_id = b.id
+where p.is_produksi = 1
+order by dt.created_at desc
+
+
+
+
+
+
+📁 dashboard
+│   └── home.blade.php
+│   └── statistik.blade.php
+
+📁 master_data
+│   └── supplier/
+│       └── index.blade.php
+│       └── create.blade.php
+│   └── satuan/
+│       └── index.blade.php
+│   └── kategori_produk/
+│   └── konsumen/
+│   └── produk/
+│   └── bahan_baku/
+│   └── aset/
+
+📁 pembelian
+│   └── bahan_baku/
+│       └── index.blade.php
+│       └── create.blade.php
+│   └── produk/
+│   └── aset/
+│   └── hutang_supplier/             ← (baru) fitur pencatatan hutang
+│   └── retur_pembelian/            ← (baru) fitur pengembalian barang
+│   └── laporan_pembelian/          ← (opsional)
+
+📁 penjualan
+│   └── kasir/
+│   └── piutang_konsumen/
+│   └── pembayaran_piutang/
+│   └── laporan_penjualan/
+│   └── laporan_per_produk/
+│   └── laporan_hasil_produksi/
+
+📁 pengeluaran
+│   └── operasional/                ← (baru) transportasi, air, makan, pulsa
+│       └── index.blade.php
+│       └── create.blade.php
+│   └── laporan_pengeluaran/
+
+📁 produksi
+│   └── proses_produksi/            ← (opsional) untuk produksi barang
+│   └── hasil_produksi/
+│   └── laporan_produksi/
+
+📁 laporan_umum
+│   └── laba_rugi/                  ← (opsional)
+│   └── stok_barang/
+│   └── arus_kas/
+
+📁 keuangan
+│   └── kas/
+│       └── kas_masuk/
+│       └── kas_keluar/
+│       └── kas_kecil/             ← (opsional)
+│   └── rekening_bank/             ← (opsional jika ada multi metode bayar)
+
+
+
+
+=================================================================================
+📁 Master Data
+   ├─ Supplier
+   ├─ Produk
+   ├─ Bahan Baku
+   ├─ Konsumen
+   ├─ Satuan
+
+📁 Pembelian
+   ├─ Pembelian Produk
+   ├─ Pembelian Bahan Baku
+   ├─ Pembelian Aset
+   ├─ Hutang ke Supplier
+   ├─ Retur Pembelian
+
+📁 Penjualan
+   ├─ Kasir
+   ├─ Piutang Konsumen
+   ├─ Pembayaran Piutang
+   ├─ Laporan Penjualan
+
+📁 Produksi
+   ├─ Proses Produksi
+   ├─ Hasil Produksi
+   ├─ Laporan Produksi
+
+📁 Pengeluaran
+   ├─ Pengeluaran Operasional
+   ├─ Laporan Pengeluaran
+
+📁 Keuangan
+   ├─ Kas Masuk / Keluar
+   ├─ Kas Kecil (opsional)
+   ├─ Rekening Bank (opsional)
+
+📁 Laporan Umum
+   ├─ Laba Rugi
+   ├─ Stok Barang
+   ├─ Arus Kas

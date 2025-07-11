@@ -1,0 +1,11 @@
+{
+    "name": "Periode",
+    "alias": "periode",
+    "description": "",
+    "keywords": [],
+    "priority": 0,
+    "providers": [
+        "Modules\\Periode\\Providers\\PeriodeServiceProvider"
+    ],
+    "files": []
+}

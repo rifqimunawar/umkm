@@ -1,0 +1,11 @@
+{
+    "name": "Pemasukan",
+    "alias": "pemasukan",
+    "description": "",
+    "keywords": [],
+    "priority": 0,
+    "providers": [
+        "Modules\\Pemasukan\\Providers\\PemasukanServiceProvider"
+    ],
+    "files": []
+}

@@ -1,0 +1,30 @@
+{
+    "name": "nwidart/m2block",
+    "description": "",
+    "authors": [
+        {
+            "name": "Nicolas Widart",
+            "email": "n.widart@gmail.com"
+        }
+    ],
+    "extra": {
+        "laravel": {
+            "providers": [],
+            "aliases": {
+
+            }
+        }
+    },
+    "autoload": {
+        "psr-4": {
+            "Modules\\M2block\\": "app/",
+            "Modules\\M2block\\Database\\Factories\\": "database/factories/",
+            "Modules\\M2block\\Database\\Seeders\\": "database/seeders/"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "Modules\\M2block\\Tests\\": "tests/"
+        }
+    }
+}

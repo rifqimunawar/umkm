@@ -1,0 +1,30 @@
+{
+    "name": "nwidart/pemasukan",
+    "description": "",
+    "authors": [
+        {
+            "name": "Nicolas Widart",
+            "email": "n.widart@gmail.com"
+        }
+    ],
+    "extra": {
+        "laravel": {
+            "providers": [],
+            "aliases": {
+
+            }
+        }
+    },
+    "autoload": {
+        "psr-4": {
+            "Modules\\Pemasukan\\": "app/",
+            "Modules\\Pemasukan\\Database\\Factories\\": "database/factories/",
+            "Modules\\Pemasukan\\Database\\Seeders\\": "database/seeders/"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "Modules\\Pemasukan\\Tests\\": "tests/"
+        }
+    }
+}

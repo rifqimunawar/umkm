@@ -1,0 +1,30 @@
+{
+    "name": "nwidart/jabatan",
+    "description": "",
+    "authors": [
+        {
+            "name": "Nicolas Widart",
+            "email": "n.widart@gmail.com"
+        }
+    ],
+    "extra": {
+        "laravel": {
+            "providers": [],
+            "aliases": {
+
+            }
+        }
+    },
+    "autoload": {
+        "psr-4": {
+            "Modules\\Jabatan\\": "app/",
+            "Modules\\Jabatan\\Database\\Factories\\": "database/factories/",
+            "Modules\\Jabatan\\Database\\Seeders\\": "database/seeders/"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "Modules\\Jabatan\\Tests\\": "tests/"
+        }
+    }
+}

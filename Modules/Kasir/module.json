@@ -1,0 +1,11 @@
+{
+    "name": "Kasir",
+    "alias": "kasir",
+    "description": "",
+    "keywords": [],
+    "priority": 0,
+    "providers": [
+        "Modules\\Kasir\\Providers\\KasirServiceProvider"
+    ],
+    "files": []
+}

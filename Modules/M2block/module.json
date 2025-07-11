@@ -1,0 +1,11 @@
+{
+    "name": "M2block",
+    "alias": "m2block",
+    "description": "",
+    "keywords": [],
+    "priority": 0,
+    "providers": [
+        "Modules\\M2block\\Providers\\M2blockServiceProvider"
+    ],
+    "files": []
+}

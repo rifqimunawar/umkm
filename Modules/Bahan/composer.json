@@ -1,0 +1,30 @@
+{
+    "name": "nwidart/bahan",
+    "description": "",
+    "authors": [
+        {
+            "name": "Nicolas Widart",
+            "email": "n.widart@gmail.com"
+        }
+    ],
+    "extra": {
+        "laravel": {
+            "providers": [],
+            "aliases": {
+
+            }
+        }
+    },
+    "autoload": {
+        "psr-4": {
+            "Modules\\Bahan\\": "app/",
+            "Modules\\Bahan\\Database\\Factories\\": "database/factories/",
+            "Modules\\Bahan\\Database\\Seeders\\": "database/seeders/"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "Modules\\Bahan\\Tests\\": "tests/"
+        }
+    }
+}
