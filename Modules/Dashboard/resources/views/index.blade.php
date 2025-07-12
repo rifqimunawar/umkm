@@ -83,6 +83,46 @@
   </div>
   <!-- END row -->
 
+  <!-- BEGIN row -->
+  <div class="row">
+    <!-- BEGIN col-8 -->
+    <div class="col-xl-8">
+      <div class="widget-chart with-sidebar" data-bs-theme="dark">
+        <div class="widget-chart-content bg-gray-800">
+          <h4 class="chart-title">
+            Penjualan Bulanan
+            <small>Data penjualan per bulan</small>
+          </h4>
+          <div id="visitors-line-chart" class="widget-chart-full-width dark-mode" style="height: 257px;"></div>
+        </div>
+      </div>
+    </div>
+    <!-- END col-8 -->
+    <!-- BEGIN col-4 -->
+    <div class="col-xl-4">
+      <div class="panel panel-inverse" data-sortable-id="index-1">
+        <div class="panel-heading">
+          <h4 class="panel-title">
+            Produk Menipis
+          </h4>
+        </div>
+        <div class="list-group list-group-flush " data-bs-theme="dark">
+
+          @foreach ($data_menipis->take(7) as $item)
+            <a href="javascript:;" class="list-group-item list-group-item-action d-flex">
+              <span class="flex-1">{{ $loop->iteration }}. {{ $item->nama_produk ?? '-' }}</span>
+              <span class="badge bg-teal fs-10px">{{ $item->jumlah_produk ?? 0 }} &emsp;
+                {{ $item->satuan->nama_satuan ?? '-' }}</span>
+            </a>
+          @endforeach
+
+        </div>
+      </div>
+    </div>
+    <!-- END col-4 -->
+  </div>
+  <!-- END row -->
+
 
 
   <!-- ================== BEGIN page-js ================== -->
@@ -90,14 +130,104 @@
   <script src="{{ asset('assets/plugins/nvd3/build/nv.d3.min.js') }}"></script>
   <script src="{{ asset('assets/plugins/jvectormap-next/jquery-jvectormap.min.js') }}"></script>
   <script src="{{ asset('assets/plugins/jvectormap-content/world-mill.js') }}"></script>
-  <script src="{{ asset('assets/plugins/apexcharts/dist/apexcharts.min.js') }}"></script>
-  <script src="{{ asset('assets/plugins/moment/min/moment.min.js') }}"></script>
-  <script src="{{ asset('assets/plugins/bootstrap-daterangepicker/daterangepicker.js') }}"></script>
-  <script src="{{ asset('assets/js/demo/dashboard-v3.js') }}"></script>
+  <script src="{{ asset('assets/plugins/gritter/js/jquery.gritter.js') }}"></script>
+  {{-- <script src="{{ asset('assets/js/demo/dashboard-v2.js') }}"></script> --}}
 
-  <script src="../assets/plugins/@highlightjs/cdn-assets/highlight.min.js"></script>
-  <script src="../assets/js/demo/render.highlight.js"></script>
+  <script>
+    function parseDateStr(dateStr) {
+      const [day, monthStr, year] = dateStr.split(' ');
+      const monthNames = ["JAN", "FEB", "MAR", "APR", "MAY", "JUN", "JUL", "AUG", "SEP", "OCT", "NOV", "DEC"];
+      const monthIndex = monthNames.indexOf(monthStr.toUpperCase());
+      const fullYear = 2000 + parseInt(year);
+      return new Date(fullYear, monthIndex, parseInt(day));
+    }
 
-  <script src="../assets/plugins/apexcharts/dist/apexcharts.min.js"></script>
+    function formatApiDataForChart(produksiData, produkData) {
+      const produksiMap = new Map();
+      produksiData.forEach(item => {
+        produksiMap.set(item.tanggal, item.total_harga_harian);
+      });
+      const produkMap = new Map();
+      produkData.forEach(item => {
+        produkMap.set(item.tanggal, item.total_harga_harian);
+      });
+      const allDates = new Set([...produksiMap.keys(), ...produkMap.keys()]);
+      const sortedDates = Array.from(allDates).sort((a, b) => parseDateStr(a) - parseDateStr(b));
+      const produksiValues = sortedDates.map(tgl => [parseDateStr(tgl), produksiMap.get(tgl) || 0]);
+      const produkValues = sortedDates.map(tgl => [parseDateStr(tgl), produkMap.get(tgl) || 0]);
+
+      return [{
+          key: 'Hasil Produksi',
+          color: 'rgba(0, 150, 136, 0.8)',
+          values: produksiValues
+        },
+        {
+          key: 'Produk Jadi',
+          color: 'rgba(33, 150, 243, 0.8)',
+          values: produkValues
+        }
+      ];
+    }
+
+
+    async function handleVisitorsAreaChart() {
+      const produksiData = await fetch('/ajx_get/data_harian_produksi').then(res => res.json());
+      const produkData = await fetch('/ajx_get/data_harian_produk').then(res => res.json());
+      const visitorAreaChartData = formatApiDataForChart(produksiData, produkData);
+      nv.addGraph(function() {
+        const chart = nv.models.stackedAreaChart()
+          .useInteractiveGuideline(true)
+          .x(d => d[0])
+          .y(d => d[1])
+          .pointSize(0.5)
+          .margin({
+            left: 50,
+            right: 25,
+            top: 20,
+            bottom: 20
+          })
+          .controlLabels({
+            stacked: 'Stacked'
+          })
+          .showControls(false)
+          .duration(300);
+
+        chart.xAxis.tickFormat(function(d) {
+          const monthsName = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov',
+            'Dec'
+          ];
+          d = new Date(d);
+          return `${monthsName[d.getMonth()]} ${d.getDate()}`;
+        });
+        chart.yAxis.tickFormat(d3.format(',.0f'));
+
+        d3.select('#visitors-line-chart')
+          .selectAll('*').remove();
+
+        d3.select('#visitors-line-chart')
+          .append('svg')
+          .datum(visitorAreaChartData)
+          .transition().duration(1000)
+          .call(chart);
+
+        nv.utils.windowResize(chart.update);
+        return chart;
+      });
+    }
+
+    const DashboardV2 = (function() {
+      "use strict";
+      return {
+        init: function() {
+          handleVisitorsAreaChart();
+        }
+      };
+    })();
+
+    $(document).ready(function() {
+      DashboardV2.init();
+    });
+  </script>
+
   <!-- ================== END page-js ================== -->
 @endsection

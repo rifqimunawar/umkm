@@ -9,6 +9,8 @@ use Illuminate\Database\Eloquent\Model;
 use Modules\ManagementStok\Models\Kategori;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Modules\Master\Models\Satuan;
+
 // use Modules\ManagementStok\Database\Factories\ProdukFactory;
 
 class Produk extends Model
@@ -34,6 +36,10 @@ class Produk extends Model
   public function kategori()
   {
     return $this->belongsTo(Kategori::class, 'kategori_id');
+  }
+  public function satuan()
+  {
+    return $this->belongsTo(Satuan::class, 'satuan_id');
   }
 
   public function bahans()

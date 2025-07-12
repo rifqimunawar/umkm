@@ -21,10 +21,7 @@ Route::middleware('auth')->group(function () {
   Route::get('/', fn() => redirect()->route('dashboard'));
   Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
 
-  Route::get('/ajx_get/get_data_all', [DashboardController::class, 'get_data_all']);
-  Route::get('/ajx_get/get_data_jenjang/{nama_jenjang}', [DashboardController::class, 'get_data_jenjang']);
-  Route::get('/ajx_get/get_data_fakultas/{nama_fakultas}', [DashboardController::class, 'get_data_fakultas']);
-  Route::get('/ajx_get/get_data_prodi/{nama_prodi}', [DashboardController::class, 'get_data_prodi']);
-  Route::get('/ajx_get/data_bayar_formulir', [DashboardController::class, 'get_data_bayar_formulir']);
+  Route::get('/ajx_get/data_harian_produksi', [DashboardController::class, 'getDataHarianProduksi']);
+  Route::get('/ajx_get/data_harian_produk', [DashboardController::class, 'getDataHarianProduk']);
 
 });

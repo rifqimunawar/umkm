@@ -33,26 +33,44 @@ class LaporanPrediksiBahanController extends Controller
   }
   public function index()
   {
-    $base_url = rtrim(env('APP_URL'), '/') . ':5001';
-
+    $base_url = rtrim(env('PYTHON'), '/');
     $data = $this->getDataHistoriBahan();
+
+    // Jika tidak ada data sama sekali
+    if ($data->isEmpty()) {
+      return view('laporan::/prediksi_bahan/index', [
+        'title' => "Prediksi Kebutuhan Bahan 7 Hari Kedepan",
+        'data' => [],
+        'errors' => [],
+      ]);
+    }
+
     $response = Http::post($base_url . '/prediksi_bahan_baku', $data->toArray());
-
-
     $hasil = $response->json();
+
     $rows = [];
+    $errors = [];
 
     foreach ($hasil as $nama_bahan => $items) {
+      // Skip jika ada error dari Python (misal: data kurang)
+      if (isset($items['error'])) {
+        $errors[] = $nama_bahan;
+        continue;
+      }
+
+      // Ambil hasil prediksi
       foreach ($items as $item) {
-        $tanggal_raw = $item['tanggal'];
-        $rows[] = [
-          'tanggal_raw' => $tanggal_raw,
-          'nama_bahan' => $nama_bahan,
-          'kebutuhan' => round($item['kebutuhan'], 2)
-        ];
+        if (is_array($item) && isset($item['tanggal'], $item['kebutuhan'])) {
+          $rows[] = [
+            'tanggal_raw' => $item['tanggal'],
+            'nama_bahan' => $nama_bahan,
+            'kebutuhan' => round($item['kebutuhan'], 2),
+          ];
+        }
       }
     }
 
+    // Urutkan hasil berdasarkan tanggal
     usort($rows, function ($a, $b) {
       return strtotime($a['tanggal_raw']) <=> strtotime($b['tanggal_raw']);
     });
@@ -60,7 +78,9 @@ class LaporanPrediksiBahanController extends Controller
     return view('laporan::/prediksi_bahan/index', [
       'title' => "Prediksi Kebutuhan Bahan 7 Hari Kedepan",
       'data' => $rows,
+      'errors' => $errors,
     ]);
   }
+
 
 }

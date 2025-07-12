@@ -77,7 +77,6 @@
         </a>
       </div>
     </form>
-
     <div class="panel-body">
       <table id="data-table-default" width="100%" class="table table-striped table-bordered align-middle text-nowrap">
         <thead>
@@ -101,5 +100,17 @@
 
       </table>
     </div>
+    @if (!empty($errors))
+      <div class="alert alert-warning">
+        <strong>Perhatian!</strong> Data tidak cukup untuk memprediksi kebutuhan bahan berikut:
+        <ul>
+          @foreach ($errors as $bahan)
+            <li>{{ $bahan }}</li>
+          @endforeach
+        </ul>
+        <small>Minimal diperlukan 2 data harian penggunaan per bahan untuk proses prediksi.</small>
+      </div>
+    @endif
+
   </div>
 @endsection
