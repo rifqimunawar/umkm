@@ -33,8 +33,11 @@ class LaporanPrediksiBahanController extends Controller
   }
   public function index()
   {
+    $base_url = rtrim(env('APP_URL'), '/') . ':5001';
+
     $data = $this->getDataHistoriBahan();
-    $response = Http::post('http://127.0.0.1:5001/prediksi_bahan_baku', $data->toArray());
+    $response = Http::post($base_url . '/prediksi_bahan_baku', $data->toArray());
+
 
     $hasil = $response->json();
     $rows = [];
